@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Book, type: :model do
-  subject { book = Book.create(name: "Red Rising", price: "12.99") }
+  subject { Book.create(name: "Red Rising", price: "12.99") }
 
   context 'all required fields are present' do
     it 'is valid' do

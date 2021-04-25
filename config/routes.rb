@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :books
   resources :authors
   get 'static_pages/home'
