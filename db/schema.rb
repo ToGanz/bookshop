@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_022943) do
+ActiveRecord::Schema.define(version: 2021_04_25_030624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2021_04_25_022943) do
     t.index ["name"], name: "index_authors_on_name", unique: true
   end
 
+  create_table "authorships", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "author_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_authorships_on_author_id"
+    t.index ["book_id", "author_id"], name: "index_authorships_on_book_id_and_author_id", unique: true
+    t.index ["book_id"], name: "index_authorships_on_book_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "name", null: false
     t.integer "price_cents", null: false
@@ -30,4 +40,6 @@ ActiveRecord::Schema.define(version: 2021_04_25_022943) do
     t.index ["name"], name: "index_books_on_name", unique: true
   end
 
+  add_foreign_key "authorships", "authors"
+  add_foreign_key "authorships", "books"
 end

@@ -6,8 +6,13 @@
 </p>
 
 <p>
-  <strong>Price cents:</strong>
-  <%= @book.price_cents %>
+  <strong>Author(s):</strong>
+  <%= @book.authors.join(', ') %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @book.price %>
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |

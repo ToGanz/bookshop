@@ -50,6 +50,7 @@ gem 'pg'
 gem 'devise'
 gem 'pry'
 gem 'money-rails'
+gem 'simple_form'
 
 group :development, :test do
   gem 'rspec-rails'
