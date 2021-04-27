@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  subject { Order.create(customer_email: 'test@gmail.com')}
+  subject { Order.create(customer_email: 'test@example.com')}
 
   context 'all required fields are present' do
     it 'is valid' do

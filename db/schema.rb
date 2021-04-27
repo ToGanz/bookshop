@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_035551) do
+ActiveRecord::Schema.define(version: 2021_04_25_041126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 2021_04_25_035551) do
     t.index ["name"], name: "index_books_on_name", unique: true
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "book_id", null: false
+    t.integer "quantity", null: false
+    t.integer "each_price_cents", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_line_items_on_book_id"
+    t.index ["order_id", "book_id"], name: "index_line_items_on_order_id_and_book_id", unique: true
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "customer_email", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -48,4 +60,6 @@ ActiveRecord::Schema.define(version: 2021_04_25_035551) do
 
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
+  add_foreign_key "line_items", "books"
+  add_foreign_key "line_items", "orders"
 end
